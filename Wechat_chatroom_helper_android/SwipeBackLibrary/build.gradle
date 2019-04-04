@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.sdkVersion
-    buildToolsVersion rootProject.ext.buildToolVersion
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion

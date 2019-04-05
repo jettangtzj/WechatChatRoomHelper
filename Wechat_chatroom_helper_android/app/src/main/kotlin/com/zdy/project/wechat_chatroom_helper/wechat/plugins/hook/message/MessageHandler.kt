@@ -165,7 +165,7 @@ object MessageHandler {
                             iMainAdapterRefreshes.forEach { it.onEntryInit(firstChatRoomUsername, firstOfficialUsername) }
                         }
 
-                        //刷新两个助手的列表
+                        //刷新两个助手的列表  该位置会引起属性未初始化而报错
 //                        RuntimeInfo.chatRoomViewPresenter.refreshList(false, Any())
 //                        RuntimeInfo.officialViewPresenter.refreshList(false, Any())
 

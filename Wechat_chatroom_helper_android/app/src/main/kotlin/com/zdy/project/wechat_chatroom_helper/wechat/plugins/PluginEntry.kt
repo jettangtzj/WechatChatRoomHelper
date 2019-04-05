@@ -69,13 +69,13 @@ class PluginEntry : IXposedHookLoadPackage {
              */
             try {
                 MessageHandler.executeHook()
-                MainAdapter.executeHook()
-                MainAdapterLongClick.executeHook()
-                MainLauncherUI.executeHook()
+                //MainAdapter.executeHook()
+                //MainAdapterLongClick.executeHook()
+                //MainLauncherUI.executeHook()
                 if (AppSaveInfo.openLogInfo()) {
-                    LogRecord.executeHook()
+                //    LogRecord.executeHook()
                 }
-                OtherHook.executeHook()
+                //OtherHook.executeHook()
             } catch (e: Throwable) {
                 e.printStackTrace()
             }

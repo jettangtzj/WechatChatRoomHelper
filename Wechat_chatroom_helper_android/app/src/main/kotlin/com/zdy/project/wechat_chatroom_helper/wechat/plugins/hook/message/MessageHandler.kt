@@ -97,17 +97,21 @@ object MessageHandler {
         if (cursorForOfficial.count != 0 && cursorForChatRoom.count != 0) {
             cursorForOfficial.moveToNext()
             val firstOfficialUsername = cursorForOfficial.getString(0)
+            LogUtils.log("firstOfficialUsername = $firstOfficialUsername")
             cursorForChatRoom.moveToNext()
             val firstChatRoomUsername = cursorForChatRoom.getString(0)
+            LogUtils.log("firstChatRoomUsername = $firstChatRoomUsername")
             return Pair(firstOfficialUsername, firstChatRoomUsername)
         } else {
             return if (cursorForOfficial.count == 0 && cursorForChatRoom.count != 0) {
                 cursorForChatRoom.moveToNext()
                 val firstChatRoomUsername = cursorForChatRoom.getString(0)
+                LogUtils.log("*******firstChatRoomUsername = $firstChatRoomUsername")
                 Pair("", firstChatRoomUsername)
             } else if (cursorForOfficial.count != 0 && cursorForChatRoom.count == 0) {
                 cursorForOfficial.moveToNext()
                 val firstOfficialUsername = cursorForOfficial.getString(0)
+                LogUtils.log("*******firstOfficialUsername = $firstOfficialUsername")
                 Pair(firstOfficialUsername, "")
             } else {
                 Pair("", "")
@@ -132,11 +136,11 @@ object MessageHandler {
                 val factory = param.args[0]
                 val sql = param.args[1] as String
                 val selectionArgs = param.args[2] as Array<String>?
-                val editTable = param.args[3] as String?
+                val editTable = param.args[3]
                 val cancellation = param.args[4]
 
                 val path = thisObject.toString()
-
+//                LogUtils.log("MessageHandler, queryHook, path = $path")
                 if (path.endsWith(MessageDBName)) {
                     if (MessageDatabaseObject !== thisObject) {
                         MessageDatabaseObject = thisObject
@@ -162,8 +166,8 @@ object MessageHandler {
                         }
 
                         //刷新两个助手的列表
-                        RuntimeInfo.chatRoomViewPresenter.refreshList(false, Any())
-                        RuntimeInfo.officialViewPresenter.refreshList(false, Any())
+//                        RuntimeInfo.chatRoomViewPresenter.refreshList(false, Any())
+//                        RuntimeInfo.officialViewPresenter.refreshList(false, Any())
 
                         //获取两个群聊和服务号的白名单
                         val list = AppSaveInfo.getWhiteList(AppSaveInfo.WHITE_LIST_CHAT_ROOM).plus(AppSaveInfo.getWhiteList(AppSaveInfo.WHITE_LIST_OFFICIAL))
@@ -326,6 +330,7 @@ object MessageHandler {
                         val initialValues = param.args[2] as ContentValues?
                         val conflictAlgorithm = param.args[3] as Int
 
+//                        LogUtils.log("******thisObject = $thisObject, table = $table, nullColumnHack=$nullColumnHack")
                         if (table == "message") {
 
                             if (initialValues == null) return
